@@ -1,10 +1,10 @@
 torch
 torchaudio
 torchvision
-numpy
-pandas
-scikit-learn
-matplotlib
 librosa
 soundfile
-
+pandas
+numpy
+matplotlib
+scikit-learn
+tqdm
