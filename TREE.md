@@ -377,6 +377,7 @@
 ├── LICENSE
 ├── README.md
 ├── checkpoints
+│   └── best_audio_cnn.pt
 ├── data
 │   └── ESC-50
 │       ├── .circleci
@@ -400,6 +401,7 @@
     │   ├── data_loader.cpython-314.pyc
     │   ├── dataset.cpython-314.pyc
     │   ├── models.cpython-314.pyc
+    │   ├── train.cpython-314.pyc
     │   └── transforms.cpython-314.pyc
     ├── config.py
     ├── data_loader.py

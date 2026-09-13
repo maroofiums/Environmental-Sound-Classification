@@ -11,30 +11,34 @@ from src.config import (
 
 from src.dataset import ESC50Dataset
 
-def create_dataloaders():
 
+def create_dataloaders(transform=None):
+    
     train_dataset = ESC50Dataset(
         audio_dir=AUDIO_DIR,
         metadata_path=METADATA_PATH,
         folds=[1, 2, 3],
+        transform=transform,
         target_sample_rate=SAMPLE_RATE,
-        num_samples=NUM_SAMPLES
+        num_samples=NUM_SAMPLES,
     )
 
     validation_dataset = ESC50Dataset(
         audio_dir=AUDIO_DIR,
         metadata_path=METADATA_PATH,
         folds=[4],
+        transform=transform,
         target_sample_rate=SAMPLE_RATE,
-        num_samples=NUM_SAMPLES
+        num_samples=NUM_SAMPLES,
     )
 
     test_dataset = ESC50Dataset(
         audio_dir=AUDIO_DIR,
         metadata_path=METADATA_PATH,
         folds=[5],
+        transform=transform,
         target_sample_rate=SAMPLE_RATE,
-        num_samples=NUM_SAMPLES
+        num_samples=NUM_SAMPLES,
     )
 
     train_loader = DataLoader(
