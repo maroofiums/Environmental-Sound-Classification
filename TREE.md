@@ -333,8 +333,7 @@
 │   │   ├── zipimport.meta.json
 │   │   ├── zlib.data.json
 │   │   └── zlib.meta.json
-│   ├── CACHEDIR.TAG
-│   └── missing_stubs
+│   └── CACHEDIR.TAG
 ├── .venv
 │   ├── .gitignore
 │   ├── .lock
@@ -403,6 +402,7 @@
     │   ├── dataset.cpython-314.pyc
     │   ├── evaluate.cpython-314.pyc
     │   ├── models.cpython-314.pyc
+    │   ├── predict.cpython-314.pyc
     │   ├── train.cpython-314.pyc
     │   └── transforms.cpython-314.pyc
     ├── config.py
@@ -410,6 +410,7 @@
     ├── dataset.py
     ├── evaluate.py
     ├── models.py
+    ├── predict.py
     ├── tests
     │   ├── __pycache__
     │   ├── test_data_loader.py
