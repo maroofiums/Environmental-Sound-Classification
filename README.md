@@ -461,8 +461,3 @@ Potential improvements include:
 This project is intended for educational and research purposes.
 
 Check the ESC-50 dataset repository for its dataset license and usage conditions.
-
-
-### Small README Note
-
-Your current prediction output is useful, but the README should describe it as an **example prediction**, not as proof that the model correctly classified that file. The model predicted `sneezing` with only **27.73% confidence**, so it was uncertain and likely incorrect for the selected ESC-50 example.
