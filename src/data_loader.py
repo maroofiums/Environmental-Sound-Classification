@@ -12,13 +12,25 @@ from src.config import (
 from src.dataset import ESC50Dataset
 
 
-def create_dataloaders(transform=None):
-    
+def create_dataloaders(
+    train_waveform_transform=None,
+    spectrogram_transform=None,
+):
+    """
+    Create training, validation, and test dataloaders.
+
+    Training data receives waveform augmentation.
+
+    Validation and test data do not receive augmentation.
+    They only receive the spectrogram transformation.
+    """
+
     train_dataset = ESC50Dataset(
         audio_dir=AUDIO_DIR,
         metadata_path=METADATA_PATH,
         folds=[1, 2, 3],
-        transform=transform,
+        waveform_transform=train_waveform_transform,
+        transform=spectrogram_transform,
         target_sample_rate=SAMPLE_RATE,
         num_samples=NUM_SAMPLES,
     )
@@ -27,7 +39,8 @@ def create_dataloaders(transform=None):
         audio_dir=AUDIO_DIR,
         metadata_path=METADATA_PATH,
         folds=[4],
-        transform=transform,
+        waveform_transform=None,
+        transform=spectrogram_transform,
         target_sample_rate=SAMPLE_RATE,
         num_samples=NUM_SAMPLES,
     )
@@ -36,7 +49,8 @@ def create_dataloaders(transform=None):
         audio_dir=AUDIO_DIR,
         metadata_path=METADATA_PATH,
         folds=[5],
-        transform=transform,
+        waveform_transform=None,
+        transform=spectrogram_transform,
         target_sample_rate=SAMPLE_RATE,
         num_samples=NUM_SAMPLES,
     )
@@ -46,7 +60,7 @@ def create_dataloaders(transform=None):
         batch_size=BATCH_SIZE,
         shuffle=True,
         num_workers=NUM_WORKERS,
-        # pin_memory=True
+        pin_memory=True,
     )
 
     validation_loader = DataLoader(
@@ -54,7 +68,7 @@ def create_dataloaders(transform=None):
         batch_size=BATCH_SIZE,
         shuffle=False,
         num_workers=NUM_WORKERS,
-        # pin_memory=True
+        pin_memory=True,
     )
 
     test_loader = DataLoader(
@@ -62,8 +76,7 @@ def create_dataloaders(transform=None):
         batch_size=BATCH_SIZE,
         shuffle=False,
         num_workers=NUM_WORKERS,
-        # pin_memory=True
+        pin_memory=True,
     )
-
 
     return train_loader, validation_loader, test_loader

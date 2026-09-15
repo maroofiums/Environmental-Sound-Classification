@@ -7,7 +7,15 @@ from src.config import (
     NUM_CLASSES,
     LEARNING_RATE,
     NUM_EPOCHS,
-    CHECKPOINT_DIR
+    CHECKPOINT_DIR,
+    SAMPLE_RATE
+)
+
+from src.augmentations import (
+    ComposeAudio,
+    AddGaussianNoise,
+    RandomGain,
+    RandomTimeShift
 )
 
 from src.data_loader import create_dataloaders
@@ -106,15 +114,34 @@ def main():
 
     print("Using device:", device)
 
-    transform = LogMelSpectrogramTransform(
-        sample_rate=44_100,
+    train_augmentation = ComposeAudio(
+        [
+            RandomGain(
+                gain_range=(0.8, 1.2),
+                probability=0.5,
+            ),
+            AddGaussianNoise(
+                noise_factor=0.005,
+                probability=0.5
+            ),
+            RandomTimeShift(
+                max_shift_seconds=0.5,
+                sample_rate=SAMPLE_RATE,
+                probability=0.5
+            )
+        ]
+    )
+
+    spectrogram_transform = LogMelSpectrogramTransform(
+        sample_rate=SAMPLE_RATE,
         n_fft=2048,
         hop_length=512,
         n_mels=128,
     )
 
     train_loader, validation_loader, test_loader = create_dataloaders(
-        transform=transform,
+        train_waveform_transform=train_augmentation,
+        spectrogram_transform=spectrogram_transform
     )
 
     model = AudioCNN(

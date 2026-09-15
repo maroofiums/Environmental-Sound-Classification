@@ -15,6 +15,7 @@ class ESC50Dataset(Dataset):
         metadata_path,
         folds,
         transform=None,
+        wave_transform=None,
         target_sample_rate=44_100,
         num_samples=220_500,
     ):
@@ -26,6 +27,7 @@ class ESC50Dataset(Dataset):
             self.metadata["fold"].isin(folds)
         ].reset_index(drop=True)
 
+        self.wave_transform = wave_transform
         self.transform = transform
         self.target_sample_rate = target_sample_rate
         self.num_samples = num_samples
